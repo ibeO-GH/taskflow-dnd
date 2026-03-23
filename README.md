@@ -24,3 +24,13 @@ TaskFlow is a modern task management application inspired by tools like Trello. 
 npm install
 npm run dev
 ```
+
+## 🏗️ Build
+
+```bash
+npm run build
+```
+
+## 🌐 Live Demo
+
+(Add screenshot later)
