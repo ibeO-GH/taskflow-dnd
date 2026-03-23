@@ -33,4 +33,8 @@ npm run build
 
 ## 🌐 Live Demo
 
+[Add your Vercel link here]
+
+## 📸 Preview
+
 (Add screenshot later)
