@@ -29,6 +29,14 @@ const Home = () => {
     );
   };
 
+  const updateTask = (id: number, newTitle: string) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, title: newTitle } : task,
+      ),
+    );
+  };
+
   const deleteTask = (id: number) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
@@ -52,10 +60,18 @@ const Home = () => {
     setActiveTask(null);
   };
 
+  const overlayColor = activeTask
+    ? activeTask?.status === "pending"
+      ? "border-l-yellow-400"
+      : activeTask?.status === "progress"
+        ? "border-l-blue-500"
+        : "border-l-green-500"
+    : "";
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-      <div className="max-w-6xl mx-auto p-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 text-center">
+    <div className="min-h-screen bg-[#f1f5f9] p-10">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
           TaskFlow
         </h1>
         <p className="text-center text-gray-500 mt-2 mb-6">
@@ -63,30 +79,37 @@ const Home = () => {
         </p>
         <TaskForm onAdd={handleAdd} />
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div className="grid md:grid-cols-3 gap-8 mt-10">
             <TaskColumn
               title="pending"
               tasks={pendingTasks}
               moveTask={moveTask}
+              updateTask={updateTask}
               deleteTask={deleteTask}
             />
             <TaskColumn
               title="progress"
               tasks={progressTasks}
               moveTask={moveTask}
+              updateTask={updateTask}
               deleteTask={deleteTask}
             />
             <TaskColumn
               title="completed"
               tasks={completedTasks}
               moveTask={moveTask}
+              updateTask={updateTask}
               deleteTask={deleteTask}
             />
           </div>
           <DragOverlay>
             {activeTask ? (
-              <div className="bg-white p-3 rounded-xl shadow-xl border w-[200px]">
-                {activeTask.title}
+              <div
+                className={`bg-white border border-gray-200 border-l-4 ${overlayColor} p-3 rounded-xl shadow-2xl w-[220px] rotate-1`}
+              >
+                <p className="text-sm font-medium text-gray-800">
+                  {activeTask.title}
+                </p>
               </div>
             ) : null}
           </DragOverlay>

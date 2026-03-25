@@ -13,16 +13,19 @@ const TaskForm = ({ onAdd }: { onAdd: (title: string) => void }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 mb-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm mb-8"
+    >
       <input
         type="text"
         placeholder="Enter task..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="flex-1 border px-4 py-2 rounded-lg"
+        className="flex-1 outline-none text-gray-800 placeholder-gray-400"
       />
 
-      <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
+      <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition">
         Add
       </button>
     </form>
